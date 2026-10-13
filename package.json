@@ -2,8 +2,8 @@
   "name": "wareki-seireki",
   "displayName": "和暦→西暦(年のみ)併記",
   "description": "江戸時代など(応仁〜令和)の和暦の年に、西暦の年をインライン補完(薄い文字+Tab)で併記し、元号に[[ ]]リンクを自動で付けます。月日は扱いません。",
-  "version": "0.10.2",
-  "publisher": "local",
+  "version": "0.10.3",
+  "publisher": "lin-xiangru",
   "license": "CC0-1.0",
   "repository": {
     "type": "git",

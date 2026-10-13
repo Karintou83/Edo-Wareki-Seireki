@@ -6,6 +6,8 @@
 
 `天正18年` と書くと、`[[天正]]18年（[[1590年]]）` になります。
 
+- ソースコード・不具合報告: [GitHub (Karintou83/Edo-Wareki-Seireki)](https://github.com/Karintou83/Edo-Wareki-Seireki)
+
 ## インストール
 1. [Releases](../../releases) から、最新の `wareki-seireki-x.y.z.vsix` をダウンロードします。
 2. VS Code の拡張機能の画面(`Ctrl + Shift + X`)を開き、右上の「…」→「VSIX からのインストール…」で、そのファイルを選びます。
