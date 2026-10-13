@@ -1,0 +1,6 @@
+tools/**
+test/**
+.vscode/**
+.github/**
+.gitignore
+*.vsix

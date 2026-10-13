@@ -1,0 +1,100 @@
+{
+  "name": "wareki-seireki",
+  "displayName": "和暦→西暦(年のみ)併記",
+  "description": "江戸時代など(応仁〜令和)の和暦の年に、西暦の年をインライン補完(薄い文字+Tab)で併記し、元号に[[ ]]リンクを自動で付けます。月日は扱いません。",
+  "version": "0.10.2",
+  "publisher": "local",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Karintou83/Edo-Wareki-Seireki.git"
+  },
+  "homepage": "https://github.com/Karintou83/Edo-Wareki-Seireki",
+  "bugs": {
+    "url": "https://github.com/Karintou83/Edo-Wareki-Seireki/issues"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "warekiSeireki.annotate",
+        "title": "和暦の直後に西暦(年)を併記する(選択範囲、なければ全文)"
+      },
+      {
+        "command": "warekiSeireki.linkEras",
+        "title": "リンクなしの元号を [[ ]] で囲む(選択範囲、なければ全文)"
+      },
+      {
+        "command": "warekiSeireki.dedupeLinks",
+        "title": "同じ節で重複した元号・年のリンクを外す(最初の概要は除く)"
+      }
+    ],
+    "configuration": {
+      "title": "和暦→西暦(年のみ)併記",
+      "properties": {
+        "warekiSeireki.inlineSuggestion": {
+          "type": "boolean",
+          "default": true,
+          "description": "和暦の「年」の直後に、薄い文字で西暦を提案し、Tabキーで入力できるようにする(インライン補完)。"
+        },
+        "warekiSeireki.linkYear": {
+          "type": "boolean",
+          "default": true,
+          "description": "併記する西暦の年にウィキリンクを付ける。true: 天正18年（[[1590年]]） / false: 天正18年（1590年）"
+        },
+        "warekiSeireki.parenStyle": {
+          "type": "string",
+          "enum": [
+            "fullwidth",
+            "halfwidth"
+          ],
+          "default": "fullwidth",
+          "description": "併記するときの括弧。fullwidth: 寛政12年（1800年） / halfwidth: 寛政12年(1800年)"
+        },
+        "warekiSeireki.autoLinkEra": {
+          "type": "boolean",
+          "default": true,
+          "description": "「年」を入力した瞬間に、リンクなしの元号(天正18年)を [[天正]]18年 に自動で書き換える。"
+        },
+        "warekiSeireki.eraLinkTargets": {
+          "type": "object",
+          "default": {},
+          "description": "元号のリンク先記事名の追加・上書き。例: {\"元和\": \"元和 (日本)\"} → [[元和 (日本)|元和]]18年"
+        },
+        "warekiSeireki.autoLinkDelayMs": {
+          "type": "number",
+          "default": 600,
+          "description": "元号の自動リンクまでの待ち時間(ミリ秒)。日本語入力の変換中に動かないよう、入力が止まってから動かす。"
+        },
+        "warekiSeireki.autoAnnotateWithLink": {
+          "type": "boolean",
+          "default": true,
+          "description": "元号の自動リンクと同時に、西暦(例: （[[1590年]]）)も実際に挿入する。オフにすると、元号のリンクだけを付け、西暦は薄い文字の候補(Tab)になる。"
+        },
+        "warekiSeireki.autoAnnotateRelative": {
+          "type": "boolean",
+          "default": true,
+          "description": "「同3年」「翌3年」の「年」の直後にカーソルがあって入力が止まったら、直前の元号を引き継いだ西暦を実際に挿入する。他のAI補完と競合して薄い文字の候補が出ない場合の代わり。オフにすると薄い文字の候補(Tab)だけになる。"
+        },
+        "warekiSeireki.previewDiff": {
+          "type": "boolean",
+          "default": true,
+          "description": "重複リンクの整理を、実行前に差分で確認する。「適用」を押したときだけ書き換える。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node test/run.js",
+    "verify": "node tools/verify-with-intl.js"
+  }
+}
